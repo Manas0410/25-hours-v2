@@ -30,6 +30,22 @@ export function Banner() {
         </motion.div>
         <p className="mt-4 text-center text-base text-neutral-600 dark:text-neutral-400"></p>
       </div>
+      <div className="flex items-center md:gap-4 gap-2 cursor-pointer mx-auto mt-10">
+        <a href="#contact">
+          <img
+            src={"/appstore.png"}
+            alt="Download on the App Store"
+            className="md:h-12 h-8"
+          />
+        </a>
+        <a href="#contact">
+          <img
+            src={"/playstore.png"}
+            alt="Get it on Google Play"
+            className="md:h-18 h-12"
+          />
+        </a>
+      </div>
     </div>
   );
 }
