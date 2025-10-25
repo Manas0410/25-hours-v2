@@ -6,11 +6,12 @@ import { Features } from "@/Sections/features";
 import { SpotlightPreview } from "@/Sections/abouttasks";
 import { AboutTeam } from "@/Sections/aboutteam";
 import { AboutAIFeat } from "@/Sections/aboutAIfeatures";
+import { MainNavbar } from "@/Sections/navbar";
 
 export default function Home() {
   return (
     <>
-      <NavBar />
+      <MainNavbar />
       <Banner />
       <Features />
       <SpotlightPreview />
