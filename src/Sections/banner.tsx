@@ -11,14 +11,19 @@ const words = `25hours helps you plan smarter, not harder. It turns your goals i
 export function Banner() {
   return (
     <div className="relative flex min-h-screen w-full flex-col items-start justify-start overflow-hidden">
+      {/* Purple Gradient Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-slate-400/20 rounded-full blur-[120px] z-0"></div>
+      {/* Any other background effects */}
       <BackgroundRippleEffect />
-      <div className="mt-40 w-full">
+
+      {/* Main content */}
+      <div className="mt-50 w-full ">
         <h2 className="relative z-10 mx-auto max-w-5xl text-center text-2xl font-bold text-neutral-800 md:text-4xl lg:text-7xl dark:text-neutral-100">
-          Unlock 25 Hours in a Day.
+          Unlock 25 hours in a day.
         </h2>
         <TextGenerateEffect
           words={words}
-          className="text-center max-w-7xl mx-auto text-[16px]"
+          className="text-center max-w-7xl mx-auto text-[12px]"
         />
       </div>
       <div className="mx-auto mt-4">
