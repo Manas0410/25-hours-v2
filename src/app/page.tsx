@@ -7,6 +7,9 @@ import { SpotlightPreview } from "@/Sections/abouttasks";
 import { AboutTeam } from "@/Sections/aboutteam";
 import { AboutAIFeat } from "@/Sections/aboutAIfeatures";
 import { MainNavbar } from "@/Sections/navbar";
+import { Pricing } from "@/Sections/pricing";
+import { Testimonials } from "@/Sections/testimonials";
+import { Footer } from "@/Sections/footer";
 
 export default function Home() {
   return (
@@ -17,12 +20,10 @@ export default function Home() {
       <SpotlightPreview />
       <AboutTeam />
       <AboutAIFeat />
-      <AppImages />
-      <div className="h-[100vh]"></div>
-      <div className="h-[100vh]"></div>
-      <div className="h-[100vh]"></div>
-      <div className="h-[100vh]"></div>
-      <div className="h-[100vh]"></div>
+      <Testimonials />
+      <Pricing />
+      {/* <AppImages /> */}
+      <Footer />
     </>
   );
 }

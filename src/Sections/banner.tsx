@@ -6,22 +6,22 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 import { motion } from "motion/react";
 
-const words = `Oxygen gets you high. In a catastrophic emergency, we're taking giant, panicked breaths. Suddenly you become euphoric, docile. You accept your fate. It's all right here. Emergency water landing, six hundred miles an hour. Blank faces, calm as Hindu cows`;
+const words = `25hours helps you plan smarter, not harder. It turns your goals into simple daily steps so you actually get things done — without the burnout.`;
 
 export function Banner() {
   return (
     <div className="relative flex min-h-screen w-full flex-col items-start justify-start overflow-hidden">
       <BackgroundRippleEffect />
-      <div className="mt-60 w-full">
+      <div className="mt-40 w-full">
         <h2 className="relative z-10 mx-auto max-w-5xl text-center text-2xl font-bold text-neutral-800 md:text-4xl lg:text-7xl dark:text-neutral-100">
-          UNLOCK 25 HOURS IN A DAY
+          Unlock 25 Hours in a Day.
         </h2>
         <TextGenerateEffect
           words={words}
           className="text-center max-w-7xl mx-auto text-[16px]"
         />
       </div>
-      <div className="mx-auto mt-10">
+      <div className="mx-auto mt-4">
         <motion.div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row">
           <LayoutTextFlip
             text="Make your daily routine"

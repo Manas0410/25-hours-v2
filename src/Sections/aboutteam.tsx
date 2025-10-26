@@ -5,8 +5,8 @@ import { motion } from "motion/react";
 export function AboutTeam() {
   return (
     <div className=" py-40 dark:bg-black bg-white w-full">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="bg-opacity-50 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-4xl font-bold text-transparent md:text-7xl">
+      <div className="max-w-5xl mx-auto text-center">
+        <p className="bg-opacity-50 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl">
           Manage Tasks with team Anywhere in the world
         </p>
         <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
