@@ -127,7 +127,7 @@ export function ZigZagSection({
                   <img
                     src={item.image}
                     alt={item.title || item.name || "Feature"}
-                    className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] h-auto max-h-[250px] sm:max-h-[300px] md:max-h-[400px] lg:max-h-[500px] object-contain rounded-lg shadow-2xl"
+                    className="w-full max-w-[280px] xs:max-w-[320px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto max-h-[250px] xs:max-h-[300px] sm:max-h-[350px] md:max-h-[450px] lg:max-h-[550px] xl:max-h-[600px] rounded-lg shadow-2xl object-contain"
                   />
                 )}
               </div>
