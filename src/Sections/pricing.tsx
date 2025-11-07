@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import { motion } from "motion/react";
 
 const pricingPlans = [
   {
@@ -58,24 +59,42 @@ const pricingPlans = [
 ];
 
 export function Pricing() {
+  const scrollToContact = () => {
+    const contactSection = document.querySelector("#contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div id="pricing" className="w-full min-h-screen bg-background py-20 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Transparent pricing. No strings attached.
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
             7 days free — cancel anytime
           </p>
-        </div>
+        </motion.div>
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {pricingPlans.map((plan, index) => (
-            <div
+            <motion.div
               key={plan.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
               className={cn(
                 "relative bg-card border border-border rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10",
                 plan.popular && "border-primary/50 shadow-lg shadow-primary/20 scale-105"
@@ -118,6 +137,7 @@ export function Pricing() {
 
               {/* CTA Button */}
               <button
+                onClick={scrollToContact}
                 className={cn(
                   "w-full py-3 px-6 rounded-lg font-medium transition-all duration-200",
                   plan.buttonVariant === "primary"
@@ -127,16 +147,22 @@ export function Pricing() {
               >
                 {plan.buttonText}
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center"
+        >
           <p className="text-muted-foreground">
             All plans include 7-day free trial. No credit card required.
           </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

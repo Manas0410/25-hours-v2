@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
+import { motion } from "motion/react";
 
 const testimonials = [
   {
@@ -61,67 +62,80 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <div id="testimonials" className="w-full min-h-screen bg-background py-20 px-4">
+    <div id="testimonials" className="w-full min-h-screen bg-background py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10 md:mb-16 px-4"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 md:mb-4">
             Trusted by users around the world
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground">
             Hear directly from our community. Real stories, real results, real impact.
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
-            <div
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
               key={testimonial.id}
-              className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-card border border-border rounded-lg md:rounded-xl p-4 sm:p-5 md:p-6 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
             >
               {/* Star Rating */}
-              <div className="flex gap-1 mb-4">
+              <div className="flex gap-1 mb-3 md:mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star
                     key={i}
-                    className="h-5 w-5 fill-primary text-primary"
+                    className="h-4 w-4 sm:h-5 sm:w-5 fill-primary text-primary"
                   />
                 ))}
               </div>
 
               {/* Testimonial Text */}
-              <p className="text-card-foreground mb-6 leading-relaxed">
+              <p className="text-sm sm:text-base text-card-foreground mb-4 md:mb-6 leading-relaxed">
                 "{testimonial.text}"
               </p>
 
               {/* User Info */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   {/* Avatar */}
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                    <span className="text-primary-foreground font-semibold text-sm">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary-foreground font-semibold text-xs sm:text-sm">
                       {testimonial.avatar}
                     </span>
                   </div>
                   
                   {/* User Details */}
-                  <div>
-                    <h4 className="text-card-foreground font-semibold">
+                  <div className="min-w-0 flex-1">
+                    <h4 className="text-sm sm:text-base text-card-foreground font-semibold truncate">
                       {testimonial.name}
                     </h4>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate">
                       {testimonial.title}
                     </p>
                   </div>
                 </div>
 
                 {/* Platform */}
-                <span className="text-primary font-medium text-sm">
-                  {testimonial.platform}
-                </span>
+                {testimonial.platform && (
+                  <span className="text-primary font-medium text-xs sm:text-sm flex-shrink-0">
+                    {testimonial.platform}
+                  </span>
+                )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

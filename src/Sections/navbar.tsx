@@ -18,17 +18,30 @@ export function MainNavbar() {
       name: "Features",
       link: "#features",
     },
-    {
-      name: "Pricing",
-      link: "#pricing",
-    },
+    // {
+    //   name: "Pricing",
+    //   link: "#pricing",
+    // },
     {
       name: "Contact",
       link: "#contact",
     },
+    {
+      name: "About",
+      link: "#about",
+    },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const scrollToContact = () => {
+    const contactSection = document.querySelector("#contact");
+    console.log(contactSection);
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <div className="fixed top-0 w-full z-50 ">
@@ -38,8 +51,14 @@ export function MainNavbar() {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Demo</NavbarButton>
+            {/* <NavbarButton variant="secondary">Login</NavbarButton> */}
+            <NavbarButton
+              variant="primary"
+              as="button"
+              onClick={scrollToContact}
+            >
+              Demo
+            </NavbarButton>
           </div>
         </NavBody>
 
@@ -68,15 +87,15 @@ export function MainNavbar() {
               </a>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <NavbarButton
+              {/* <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
                 className="w-full"
               >
                 Login
-              </NavbarButton>
+              </NavbarButton> */}
               <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={scrollToContact}
                 variant="primary"
                 className="w-full"
               >
