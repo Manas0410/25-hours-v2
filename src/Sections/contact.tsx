@@ -27,14 +27,23 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Here you would typically send the form data to your backend
-    // For now, we'll just simulate an API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
+
+    await fetch("https://my-emailservice.vercel.app/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tomail: formData.email,
+        bcc: "manasshrivastava0410@gmail.com,sanskratiagrawal306@gmail.com",
+        subject: "THANK YOU FOR CONNECTING WITH 25 hours Team",
+        message: `\nHello ${formData.name},\n\nThank you for connecting with the 25 Hours Team.\n\n Your Message: ${formData.message} .\n\nWe're excited to have you in our community. Once we are live, you'll be the first to know.\n\nBest regards,\n25 Hours Team`,
+      }),
+    });
+
     console.log("Form submitted:", formData);
     setIsSubmitting(false);
-    
+
     // Reset form
     setFormData({
       name: "",
@@ -42,7 +51,7 @@ export function Contact() {
       subject: "",
       message: "",
     });
-    
+
     // You can add a toast notification here
     alert("Thank you for your message! We'll get back to you soon.");
   };
@@ -70,7 +79,7 @@ export function Contact() {
 
   return (
     <div
-    //   id="contact"
+      //   id="contact"
       className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden py-20 px-4"
     >
       {/* Background Effects */}
