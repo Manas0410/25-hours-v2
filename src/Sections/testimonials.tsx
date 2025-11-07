@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
+import { IconBrandTwitter, IconBrandReddit } from "@tabler/icons-react";
 import { motion } from "motion/react";
 
 const testimonials = [
@@ -11,7 +12,7 @@ const testimonials = [
     title: "Software Developer",
     avatar: "AP",
     rating: 5,
-    text: "It will be helpful more in its agentic form where you are offloading the repetitive tasks burden from users."
+    text: "It will be helpful more in its agentic form where you are offloading the repetitive tasks burden from users.",
   },
   {
     id: 2,
@@ -20,7 +21,7 @@ const testimonials = [
     platform: "Reddit",
     avatar: "EV",
     rating: 5,
-    text: "This is really a cool idea, because I am personally a bit crazy about this topic and tracking tasks and routines and so far I haven't found anything that fulfills all my requirements."
+    text: "This is really a cool idea, because I am personally a bit crazy about this topic and tracking tasks and routines and so far I haven't found anything that fulfills all my requirements.",
   },
   {
     id: 3,
@@ -29,7 +30,7 @@ const testimonials = [
     platform: "Twitter",
     avatar: "LD",
     rating: 5,
-    text: "I really need this app in my daily life."
+    text: "I really need this app in my daily life.",
   },
   {
     id: 4,
@@ -38,7 +39,7 @@ const testimonials = [
     platform: "Reddit",
     avatar: "DP",
     rating: 5,
-    text: "The habit tracking feature helped me build a consistent content schedule. 47-day streak and counting!"
+    text: "The habit tracking feature helped me build a consistent content schedule. 47-day streak and counting!",
   },
   {
     id: 5,
@@ -47,7 +48,7 @@ const testimonials = [
     platform: "Twitter",
     avatar: "LT",
     rating: 5,
-    text: "Prepared for my interviews in 10 days with 25hours. The timeline it created was perfect. Got my dream job!"
+    text: "Prepared for my interviews in 10 days with 25hours. The timeline it created was perfect. Got my dream job!",
   },
   {
     id: 6,
@@ -56,13 +57,28 @@ const testimonials = [
     platform: "Reddit",
     avatar: "AK",
     rating: 5,
-    text: "The AI motivator keeps me going when I feel stuck. It's like having a personal coach who actually gets me."
-  }
+    text: "The AI motivator keeps me going when I feel stuck. It's like having a personal coach who actually gets me.",
+  },
 ];
+
+const getPlatformIcon = (platform?: string) => {
+  switch ((platform ?? "").toLowerCase()) {
+    case "twitter":
+    case "x":
+      return IconBrandTwitter;
+    case "reddit":
+      return IconBrandReddit;
+    default:
+      return null;
+  }
+};
 
 export function Testimonials() {
   return (
-    <div id="testimonials" className="w-full min-h-screen bg-background py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
+    <div
+      id="testimonials"
+      className="w-full min-h-screen bg-background py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+    >
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
@@ -76,7 +92,8 @@ export function Testimonials() {
             Trusted by users around the world
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Hear directly from our community. Real stories, real results, real impact.
+            Hear directly from our community. Real stories, real results, real
+            impact.
           </p>
         </motion.div>
 
@@ -116,7 +133,7 @@ export function Testimonials() {
                       {testimonial.avatar}
                     </span>
                   </div>
-                  
+
                   {/* User Details */}
                   <div className="min-w-0 flex-1">
                     <h4 className="text-sm sm:text-base text-card-foreground font-semibold truncate">
@@ -129,11 +146,18 @@ export function Testimonials() {
                 </div>
 
                 {/* Platform */}
-                {testimonial.platform && (
-                  <span className="text-primary font-medium text-xs sm:text-sm flex-shrink-0">
-                    {testimonial.platform}
-                  </span>
-                )}
+                {(() => {
+                  const PlatformIcon = getPlatformIcon(testimonial.platform);
+                  return PlatformIcon ? (
+                    <span
+                      className="text-primary flex-shrink-0"
+                      aria-label={testimonial.platform}
+                      title={testimonial.platform}
+                    >
+                      <PlatformIcon size={18} className="sm:h-5 sm:w-5" />
+                    </span>
+                  ) : null;
+                })()}
               </div>
             </motion.div>
           ))}

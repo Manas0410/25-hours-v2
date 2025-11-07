@@ -167,3 +167,6 @@
 .invert-white {
   filter: invert(1);
 }
+.scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+}

@@ -17,29 +17,36 @@ interface ZigZagSectionProps {
   isSingleItem?: boolean;
 }
 
-export function ZigZagSection({ items, isSingleItem = false }: ZigZagSectionProps) {
-  const containerClass = isSingleItem 
+export function ZigZagSection({
+  items,
+  isSingleItem = false,
+}: ZigZagSectionProps) {
+  const containerClass = isSingleItem
     ? "relative flex h-screen w-full overflow-hidden rounded-md antialiased md:items-center md:justify-center"
     : "relative w-full overflow-hidden antialiased";
 
   return (
     <div className={containerClass}>
-      <div className={cn(
-        "relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10",
-        isSingleItem 
-          ? "h-full py-12 sm:py-16 md:py-20 pt-24 sm:pt-28 md:pt-20"
-          : "py-12 sm:py-16 md:py-20"
-      )}>
+      <div
+        className={cn(
+          "relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10",
+          isSingleItem
+            ? "h-full py-12 sm:py-16 md:py-20 pt-24 sm:pt-28 md:pt-20"
+            : "py-12 sm:py-16 md:py-20"
+        )}
+      >
         {items.map((item, index) => {
           const isEven = index % 2 === 0;
-          const descriptions = Array.isArray(item.description) ? item.description : [item.description];
+          const descriptions = Array.isArray(item.description)
+            ? item.description
+            : [item.description];
           const hasVideo = !!item.video;
-          
+
           // For single item, don't use zig-zag, use standard layout
           const layoutClass = isSingleItem
-            ? "flex flex-col md:flex-row items-center md:items-center gap-6 sm:gap-8 md:gap-12"
+            ? "flex flex-col md:flex-row items-center md:items-center gap-6 sm:gap-8 md:gap-12 justify-center"
             : cn(
-                "flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-12 mb-16 md:mb-20",
+                "flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-12 mb-16 md:mb-20 justify-center",
                 isEven ? "md:flex-row" : "md:flex-row-reverse"
               );
 
@@ -49,14 +56,19 @@ export function ZigZagSection({ items, isSingleItem = false }: ZigZagSectionProp
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: isSingleItem ? 0 : index * 0.1 }}
+              transition={{
+                duration: 0.6,
+                delay: isSingleItem ? 0 : index * 0.1,
+              }}
               className={layoutClass}
             >
               {/* Text Content */}
-              <div className={cn(
-                "flex-1 w-full max-w-2xl",
-                isSingleItem ? "" : "order-2 md:order-1"
-              )}>
+              <div
+                className={cn(
+                  "w-full max-w-2xl",
+                  isSingleItem ? "" : "order-2 md:order-1"
+                )}
+              >
                 {item.title && (
                   <h2 className="bg-opacity-50 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent mb-4 sm:mb-6">
                     {item.title}
@@ -79,7 +91,11 @@ export function ZigZagSection({ items, isSingleItem = false }: ZigZagSectionProp
                     key={descIndex}
                     className={cn(
                       "text-left text-sm sm:text-base md:text-lg font-normal text-neutral-300 leading-relaxed",
-                      descIndex === 0 ? (isSingleItem ? "mt-4 sm:mt-6" : "") : "mt-3 sm:mt-4"
+                      descIndex === 0
+                        ? isSingleItem
+                          ? "mt-4 sm:mt-6"
+                          : ""
+                        : "mt-3 sm:mt-4"
                     )}
                   >
                     {desc}
@@ -88,12 +104,14 @@ export function ZigZagSection({ items, isSingleItem = false }: ZigZagSectionProp
               </div>
 
               {/* Media (Video or Image) */}
-              <div className={cn(
-                "flex-1 flex items-center w-full md:w-auto",
-                isSingleItem 
-                  ? "justify-center md:justify-end mt-6 md:mt-0"
-                  : "justify-center order-1 md:order-2"
-              )}>
+              <div
+                className={cn(
+                  " flex items-center w-full md:w-auto",
+                  isSingleItem
+                    ? "justify-center md:justify-end mt-6 md:mt-0"
+                    : "justify-center order-1 md:order-2"
+                )}
+              >
                 {hasVideo ? (
                   <video
                     autoPlay
@@ -120,4 +138,3 @@ export function ZigZagSection({ items, isSingleItem = false }: ZigZagSectionProp
     </div>
   );
 }
-

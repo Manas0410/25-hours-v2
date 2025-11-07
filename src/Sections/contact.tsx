@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { motion } from "motion/react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Contact() {
@@ -14,6 +14,25 @@ export function Contact() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+
+  const handleCopy = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    text: string,
+    index: number
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedIndex(index);
+      setTimeout(() => {
+        setCopiedIndex((current) => (current === index ? null : current));
+      }, 1500);
+    } catch (error) {
+      console.error("Failed to copy", error);
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -136,7 +155,7 @@ export function Contact() {
                     transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
                     className={cn(
-                      "flex items-start gap-4 p-4 rounded-xl",
+                      "flex items-start gap-4 p-4 rounded-xl overflow-hidden",
                       "bg-card border border-border",
                       "hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
                       "transition-all duration-300 group"
@@ -145,13 +164,33 @@ export function Contact() {
                     <div className="flex-shrink-0 p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <IconComponent className="h-5 w-5 text-primary" />
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-muted-foreground mb-1">
                         {info.label}
                       </p>
-                      <p className="text-foreground font-medium">
-                        {info.value}
-                      </p>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-foreground font-medium flex-1 min-w-0 break-all">
+                          {info.value}
+                        </p>
+                        <button
+                          onClick={(e) => handleCopy(e, info.value, index)}
+                          aria-label={`Copy ${info.label}`}
+                          title="Copy to clipboard"
+                          className={cn(
+                            "p-2 rounded-md flex-shrink-0",
+                            "text-muted-foreground hover:text-foreground",
+                            "hover:bg-primary/10 transition-colors",
+                            copiedIndex === index &&
+                              "text-primary bg-primary/10"
+                          )}
+                        >
+                          {copiedIndex === index ? (
+                            <Check className="h-4 w-4" />
+                          ) : (
+                            <Copy className="h-4 w-4" />
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </motion.a>
                 );
