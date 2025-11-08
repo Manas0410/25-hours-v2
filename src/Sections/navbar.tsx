@@ -105,8 +105,6 @@ export function MainNavbar() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-
-      {/* Navbar */}
     </div>
   );
 }
