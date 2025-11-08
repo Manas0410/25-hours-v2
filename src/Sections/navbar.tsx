@@ -57,7 +57,7 @@ export function MainNavbar() {
               as="button"
               onClick={scrollToContact}
             >
-              Demo
+              Schedule demo
             </NavbarButton>
           </div>
         </NavBody>
