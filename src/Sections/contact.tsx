@@ -303,7 +303,6 @@ export function Contact() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  required
                   rows={6}
                   className={cn(
                     "w-full px-4 py-3 rounded-lg resize-none",
