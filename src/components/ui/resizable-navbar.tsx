@@ -1,5 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
+import {
+  SignedIn,
+  SignedOut,
+  SignUpButton,
+  UserButton,
+} from "@clerk/clerk-react";
+import { SignInButton } from "@clerk/nextjs";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
   motion,
@@ -141,6 +148,23 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
           <span className="relative z-20">{item.name}</span>
         </a>
       ))}
+      <SignedOut>
+        <SignInButton>
+          <button className="px-4 py-1 rounded-md bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
+            Sign In
+          </button>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "w-4 h-4", // controls avatar container size
+              userButtonTrigger: "w-4 h-4 p-0", // controls the full button area
+            },
+          }}
+        />
+      </SignedIn>
     </motion.div>
   );
 };
@@ -236,11 +260,7 @@ export const NavbarLogo = () => {
       href="#"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <img
-        src="/25Hourslogo.png"
-        alt="logo"
-        className="w-10 h-10 bg-white invert-white"
-      />
+      <img src="/logo.png" alt="logo" className="w-10 h-10 " />
       <span className="font-medium text-black dark:text-white">25hours</span>
     </a>
   );
