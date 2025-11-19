@@ -1,81 +1,34 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+// app/googlecalendar/page.tsx
+import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
 
-// components/GoogleCalendarConnect.jsx
-const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-const GOOGLE_REDIRECT_URI =
-  process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI ||
-  "http://localhost:3000/api/auth/google/callback";
+// load client component without SSR (it's a client component anyway)
+const GoogleCalendarConnect = dynamic(
+  () => import("@/components/GoogleCalendarConnect"),
+  { ssr: false }
+);
 
-// Scopes required for calendar access
-const SCOPES = [
-  "openid",
-  "email",
-  "https://www.googleapis.com/auth/calendar.events",
-].join(" ");
-
-function getGoogleOAuthUrl() {
-  const params = new URLSearchParams({
-    client_id: GOOGLE_CLIENT_ID,
-    redirect_uri: GOOGLE_REDIRECT_URI,
-    response_type: "code",
-    scope: SCOPES,
-    prompt: "consent",
-    access_type: "offline",
-  });
-  return `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
-}
-
-const GoogleCalendarConnect = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    async function sendCodeToBackend() {
-      const code = searchParams.get("code");
-      const userId = "123456"; // Adjust as needed
-
-      if (!code || !userId) {
-        // Handle error or redirect
-        return;
-      }
-
-      // Call your backend to exchange code -> tokens and save
-      const resp = await fetch(
-        "http://localhost:3001/user/add-creds/google-calendar",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            code,
-            userId,
-          }),
-          credentials: "include",
+export default function GoogleCalendarPage() {
+  return (
+    <div className="min-h-screen grid place-items-center bg-gray-950 text-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <Suspense
+        fallback={
+          <div className="w-full bg-gray-900/60 border border-gray-800 rounded-2xl p-6">
+            <div className="animate-pulse space-y-4">
+              <div className="h-6 bg-gray-800 rounded w-1/3" />
+              <div className="h-3 bg-gray-800 rounded w-3/4" />
+              <div className="h-10 bg-gray-800 rounded w-48" />
+            </div>
+          </div>
         }
-      );
-
-      const data = await resp.json();
-
-      if (resp.ok) {
-        // Success: tokens added
-        router.push("/dashboard");
-      } else {
-        // Handle error (show data.error or redirect)
-      }
-    }
-
-    sendCodeToBackend();
-  }, [searchParams, router]);
-  const handleConnect = () => {
-    window.location.href = getGoogleOAuthUrl();
-  };
-
-  return <button onClick={handleConnect}>Connect Google Calendar</button>;
-};
-
-export default GoogleCalendarConnect;
+      >
+        <GoogleCalendarConnect />
+      </Suspense>
+    </div>
+  );
+}
 
 // code=4/0AVGzR1ADzUScCC3ZrlA2UJBsVpGYHhKDxCSaKIyRzYItDk6Xz5v8oGMiIKlznaz1337lyw
 

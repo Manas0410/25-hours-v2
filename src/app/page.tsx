@@ -17,7 +17,6 @@ import { AboutTeam } from "@/Sections/aboutteam";
 export default function Home() {
   return (
     <>
-      <MainNavbar />
       <Banner />
       <Features />
       <SpotlightSection />
@@ -26,7 +25,7 @@ export default function Home() {
       <Testimonials />
       {/* <Pricing /> */}
       <div id="contact"></div>
-        <Contact />
+      <Contact />
       <AboutShort />
       {/* <AppImages /> */}
       <Footer />
