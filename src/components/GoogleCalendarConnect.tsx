@@ -49,7 +49,7 @@ export default function GoogleCalendarConnect() {
       try {
         const resp = await fetch(
           // update to your production API or use relative path
-          "http://localhost:3001/user/add-creds/google-calendar",
+          "https://25hour-server.vercel.app/user/add-creds/google-calendar",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
