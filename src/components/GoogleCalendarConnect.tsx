@@ -64,9 +64,9 @@ export default function GoogleCalendarConnect() {
           setStatus("success");
           setMessage("Google Calendar connected successfully. Redirecting...");
           try {
-            router.replace("/dashboard");
+            // router.replace("/");
           } catch {
-            window.location.href = "/dashboard";
+            // window.location.href = "/dashboard";
           }
         } else {
           setStatus("error");
@@ -195,3 +195,8 @@ export default function GoogleCalendarConnect() {
     </div>
   );
 }
+
+// {
+//     "code": "4/0Ab32j91G-BTqSV-ss2RLyIYXEMWoLAvCDyiZZfTJqDtRWokKJ82hgwVMaJJOtu8DUvX0uA",
+//     "userId": "user_35WICbdX5HW6ugzQZux88iT2Ju5"
+// }
