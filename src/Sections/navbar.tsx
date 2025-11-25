@@ -11,12 +11,14 @@ import {
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export function MainNavbar() {
   const navItems = [
     {
       name: "Features",
-      link: "#features",
+      link: "/#features",
     },
     // {
     //   name: "Pricing",
@@ -24,21 +26,26 @@ export function MainNavbar() {
     // },
     {
       name: "Contact",
-      link: "#contact",
+      link: "/#contact",
     },
     {
       name: "About",
-      link: "#about",
+      link: "/#about",
     },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const scrollToContact = () => {
-    const contactSection = document.querySelector("#contact");
-    console.log(contactSection);
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+    if (pathname !== "/") {
+      router.push("/#contact");
+    } else {
+      const contactSection = document.querySelector("#contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
     }
     setIsMobileMenuOpen(false);
   };
@@ -77,14 +84,14 @@ export function MainNavbar() {
             onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
-              <a
+              <Link
                 key={`mobile-link-${idx}`}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="relative text-neutral-600 dark:text-neutral-300"
               >
                 <span className="block">{item.name}</span>
-              </a>
+              </Link>
             ))}
             <div className="flex w-full flex-col gap-4">
               {/* <NavbarButton
